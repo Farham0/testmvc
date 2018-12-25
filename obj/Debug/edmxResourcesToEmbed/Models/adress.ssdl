@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="adress.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="adressStoreContainer">
+    <EntitySet Name="Categories" EntityType="adress.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CopenItems" EntityType="adress.Store.CopenItems" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CopenItemCategory" Association="adress.Store.CopenItemCategory">
+      <End Role="CopenItem" EntitySet="CopenItems" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Owner" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CopenItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="percent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="valueBeforDiscount" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="valueAfterDiscount" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="validDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CopenItemCategory">
+    <End Role="CopenItem" Type="adress.Store.CopenItems" Multiplicity="*" />
+    <End Role="Category" Type="adress.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CopenItem">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

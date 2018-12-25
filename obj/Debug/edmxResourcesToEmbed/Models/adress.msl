@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="adressStoreContainer" CdmEntityContainer="adressContainer">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(adress.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CopenItems">
+      <EntityTypeMapping TypeName="IsTypeOf(adress.CopenItem)">
+        <MappingFragment StoreEntitySet="CopenItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="percent" ColumnName="percent" />
+          <ScalarProperty Name="valueBeforDiscount" ColumnName="valueBeforDiscount" />
+          <ScalarProperty Name="valueAfterDiscount" ColumnName="valueAfterDiscount" />
+          <ScalarProperty Name="validDate" ColumnName="validDate" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

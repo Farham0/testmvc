@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="adress" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="adressContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="adress.Category" />
+    <EntitySet Name="CopenItems" EntityType="adress.CopenItem" />
+    <AssociationSet Name="CopenItemCategory" Association="adress.CopenItemCategory">
+      <End Role="CopenItem" EntitySet="CopenItems" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Owner" Type="String" Nullable="false" />
+    <NavigationProperty Name="CopenItems" Relationship="adress.CopenItemCategory" FromRole="Category" ToRole="CopenItem" />
+  </EntityType>
+  <EntityType Name="CopenItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="percent" Type="String" Nullable="false" />
+    <Property Name="valueBeforDiscount" Type="String" Nullable="false" />
+    <Property Name="valueAfterDiscount" Type="String" Nullable="false" />
+    <Property Name="validDate" Type="String" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="adress.CopenItemCategory" FromRole="CopenItem" ToRole="Category" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="CopenItemCategory">
+    <End Type="adress.CopenItem" Role="CopenItem" Multiplicity="*" />
+    <End Type="adress.Category" Role="Category" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CopenItem">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
